@@ -1,6 +1,5 @@
 project: rnshah9/mayhem-chaos
 target: chaos
-image: ghcr.io/rnshah9/playground:chaos
 
 cmds:
   - cmd: /repo/chaos @@
