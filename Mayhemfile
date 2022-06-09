@@ -1,6 +1,6 @@
-project: rnshah9/mayhem-chaos
+project: chaos
 target: chaos
 
 cmds:
-  - cmd: /repo/chaos @@
+  - cmd: /repo/chaos /test.kaos
     filepath: /test.kaos
