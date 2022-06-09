@@ -1,0 +1,30 @@
+name: "[bench] Benchmark"
+
+on: [push, pull_request]
+
+jobs:
+  main:
+    name: benchmark
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        wget https://github.com/sharkdp/hyperfine/releases/download/v1.11.0/hyperfine_1.11.0_amd64.deb
+        sudo dpkg -i hyperfine_1.11.0_amd64.deb
+        sudo make requirements
+
+    - name: Build
+      run: |
+        make clean
+        make
+        sudo make install
+
+    - name: Run the tests
+      run: |
+        make bench
