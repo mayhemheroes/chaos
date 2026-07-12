@@ -1,0 +1,5 @@
+project: chaos
+target: chaos
+
+cmds:
+  - cmd: /chaos @@
