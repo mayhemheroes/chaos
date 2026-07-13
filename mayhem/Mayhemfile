@@ -1,0 +1,15 @@
+project: chaos
+target: chaos
+
+# File-input (CLI) target: feed the fuzz bytes as a .kaos program to the chaos interpreter, driving
+# the whole lexer → parser → AST → interpreter/JIT pipeline. chaos is an exit()-on-error batch
+# interpreter, so it can't be an in-process libFuzzer harness; the interpreter binary IS the target
+# (and its own single-input reproducer). build.sh compiles it with ASan+UBSan (halting), from which
+# Mayhem derives edge coverage — the proven pattern for a sanitized file-input interpreter on this
+# base image (cf. sibling integration mayhemheroes/LISP `komplott`). @@ is the input-file placeholder.
+cmds:
+  - cmd: /mayhem/chaos @@
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/chaos/testsuite
